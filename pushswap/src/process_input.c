@@ -20,58 +20,38 @@
 /* - if duplicates = error                                                                       */
 /* ********************************************************************************************** */
 
-void	ft_fill_stack(char **tokens, t_stack *a)
+int	ft_fill_stack(char *token, int index, t_stack *node) // t_stack *a
 {
-	int i = 0;
-
-	ft_printf("filling the stack..\n");
-	while (tokens[i])
-	{
-		if (tokens[i] != NULL)
-			ft_printf("token %i: %s\n", i, tokens[i]);
-		i++;
-	}
+	printf("filling the stack..\n");
+	printf("token: %s\n", token);
+	printf("index: %i\n", index);
 	
-	a->value = 5;
-	ft_printf("value in struct: %lu\n", a->value);
+	printf("value in struct: %lu\n\n", node->value);
+	return (0);
 }
-static char	**ft_validated_tokens(char **split)
+
+// checks if a string sent contains only numerical values
+int	ft_validate_token(char *token)
 {
-	char	**tokens;
-	char	*to_check;
-	int		i;
-	int		j;
+	int	i;
 
 	i = 0;
-	j = 0;
-	tokens = split;
-	free(split);
-	if (tokens == NULL)
-		return (NULL);
-	while (tokens[i])
-	{
-		to_check = tokens[i];
-		while (ft_isdigit(to_check[j]) == 1 && to_check[j])
-			j++;
-		if (to_check[j] != '\0')
-		{
-			tokens[i][0] = '\0';
-		}
-		j = 0;
+	if (token == NULL)
+		return (-1);
+	// ft_printf("to check: %s\n", token);
+	while (token[i] && ft_isdigit(token[i]) == 1)
 		i++;
-	}
-	return (tokens);
+	if (token[i] != '\0')
+		return (-1);
+	return (0);
 }
 
-char	**ft_process_input(int argc, char **argv)
+char	**ft_create_tokens(int argc, char **argv)
 {
 	char	**tokens = NULL;
-	int		i;
 
-	i = 1;
 	if (argc < 2)
-		return (ft_printf("Error\n"), NULL);
-	// split into tokens if one argument
+		return (NULL);
 	if (argc == 2)
 	{
 		tokens = ft_split(argv[1], ' ');
@@ -83,6 +63,5 @@ char	**ft_process_input(int argc, char **argv)
 		ft_printf("handle this\n");
 		return (NULL);
 	}
-	// ft_validated_tokens(tokens);
-	return (ft_validated_tokens(tokens));
+	return (tokens);
 }

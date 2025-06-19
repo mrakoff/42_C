@@ -16,6 +16,7 @@
 # include "printf/ft_printf.h"
 # include "libft/libft.h"
 # include <unistd.h> // 
+# include <stdio.h> // printf
 # include <stdlib.h> // malloc, free
 
 
@@ -25,8 +26,8 @@ typedef struct s_stack
 	long			value; // int itself
 	int				index; // it's position in the stack
 	struct s_stack	*next; // next int info
-	struct s_stack	*head; // keeps track of top of the stack
-	struct s_stack	*tail; // keeps track of bottom of the stack
+	// struct s_stack	*head; // keeps track of top of the stack
+	// struct s_stack	*tail; // keeps track of bottom of the stack
 	
 } t_stack;
 
@@ -40,10 +41,9 @@ typedef struct s_stacks
 
 
 // PROCESS_DATA.C
-char		**ft_process_input(int argc, char **argv);
-// static char	**ft_validated_tokens(char **split);
-void		ft_fill_stack(char **token, t_stack *a);
-
+char	**ft_create_tokens(int argc, char **argv);
+int		ft_validate_token(char *token);
+int		ft_fill_stack(char *token, int index, t_stack *head);
 
 
 #endif

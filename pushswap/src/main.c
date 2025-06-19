@@ -16,15 +16,47 @@
 
 int main(int argc, char **argv)
 {
-	char	**validated_tokens;
-	t_stack	stack_a;
-	// t_stack b;
-	
-	// process the input
-	validated_tokens = ft_process_input(argc, argv);
-	if (validated_tokens == NULL)
-		ft_printf("Error\n");
+	char	**tokens;
+	// t_stack	stack_a;
+	int		i;
+	int		index;
 
-	// store the data in the struct
-	ft_fill_stack(validated_tokens, &stack_a);
+	i = 0;
+	index = 1;
+
+	t_stack *head = NULL;
+	t_stack *node = (t_stack *)malloc(sizeof(t_stack));
+	// node->value = 5;
+	node->next = NULL;
+	// head = node;
+	// node = node->next;
+
+	// printf("%li\n", ->value);
+	// process the input
+	tokens = ft_create_tokens(argc, argv);
+	if (tokens == NULL)
+		return (ft_printf("Error\n"), -1);
+
+	// check if tokens are valid and store them in the stack
+	while (tokens[i])
+	{
+		if (ft_validate_token(tokens[i]) == 0)
+		{
+			// allocate memory for a new node
+			// pass pointer to the function and write data to it
+			t_stack *node = (t_stack *)malloc(sizeof(t_stack));
+			node->value = atoi(tokens[i]);
+			node->next = NULL;
+			head = node;
+
+			ft_fill_stack(tokens[i], index, head);
+			index++;
+			node = node->next;
+		}
+		i++;
+	}
+
+	free(tokens);
+	free(node);
+
 }
