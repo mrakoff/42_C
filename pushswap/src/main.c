@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 19:09:50 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/13 23:19:28 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:07:02 by mel              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
 // -1 or NULL is returned by all the functions in case of error
+
+// change to write
 
 int main(int argc, char **argv)
 {
@@ -26,12 +28,8 @@ int main(int argc, char **argv)
 
 	t_stack *head = NULL;
 	t_stack *node = (t_stack *)malloc(sizeof(t_stack));
-	// node->value = 5;
 	node->next = NULL;
-	// head = node;
-	// node = node->next;
 
-	// printf("%li\n", ->value);
 	// process the input
 	tokens = ft_create_tokens(argc, argv);
 	if (tokens == NULL)
@@ -42,21 +40,21 @@ int main(int argc, char **argv)
 	{
 		if (ft_validate_token(tokens[i]) == 0)
 		{
-			// allocate memory for a new node
-			// pass pointer to the function and write data to it
+			// allocate memory for a new node and write data to it
 			t_stack *node = (t_stack *)malloc(sizeof(t_stack));
-			node->value = atoi(tokens[i]);
 			node->next = NULL;
 			head = node;
 
-			ft_fill_stack(tokens[i], index, head);
+			ft_fill_stack(ft_atoi(tokens[i]), index, head);
 			index++;
 			node = node->next;
 		}
+		else
+			return(ft_printf("Error\n"), 1);
 		i++;
 	}
 
 	free(tokens);
-	free(node);
+	free(node); // and the whole list ?
 
 }

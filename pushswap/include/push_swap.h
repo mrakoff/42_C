@@ -24,10 +24,8 @@
 typedef struct s_stack
 {
 	long			value; // int itself
-	int				index; // it's position in the stack
+	int				index; // it's value position in the stack
 	struct s_stack	*next; // next int info
-	// struct s_stack	*head; // keeps track of top of the stack
-	// struct s_stack	*tail; // keeps track of bottom of the stack
 	
 } t_stack;
 
@@ -40,10 +38,10 @@ typedef struct s_stacks
 
 
 
-// PROCESS_DATA.C
+// PROCESS_INPUT.C
 char	**ft_create_tokens(int argc, char **argv);
 int		ft_validate_token(char *token);
-int		ft_fill_stack(char *token, int index, t_stack *head);
+int		ft_fill_stack(int token, int index, t_stack *head);
 
 
 #endif

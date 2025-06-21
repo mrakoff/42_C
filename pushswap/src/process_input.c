@@ -20,13 +20,16 @@
 /* - if duplicates = error                                                                       */
 /* ********************************************************************************************** */
 
-int	ft_fill_stack(char *token, int index, t_stack *node) // t_stack *a
+int	ft_fill_stack(int token, int index, t_stack *node) // t_stack *a
 {
-	printf("filling the stack..\n");
-	printf("token: %s\n", token);
-	printf("index: %i\n", index);
+	// printf("filling the stack..\n");
+
+	node->value = token;
+	node->index = index;
+	printf("value: %lu\n", node->value);
+	printf("index: %d\n\n", node->index);
 	
-	printf("value in struct: %lu\n\n", node->value);
+	// sort the actual thing - compare values and assign index correctly (if smaller int - smaller index)
 	return (0);
 }
 
@@ -49,19 +52,26 @@ int	ft_validate_token(char *token)
 char	**ft_create_tokens(int argc, char **argv)
 {
 	char	**tokens = NULL;
+	char 	*unistring = ft_strdup("");
+	int		i;
 
+	i = 1;
 	if (argc < 2)
 		return (NULL);
 	if (argc == 2)
-	{
 		tokens = ft_split(argv[1], ' ');
-		if (tokens == NULL)
-			return (NULL);
-	}
 	else if (argc > 2)
 	{
-		ft_printf("handle this\n");
-		return (NULL);
+		while (argc > i)
+		{
+			unistring = ft_strjoin(unistring, argv[i]);
+			unistring = ft_strjoin(unistring, " ");
+			i++;
+		}
+		// printf("%s\n", unistring);
+		tokens = ft_split(unistring, ' ');
 	}
+	if (tokens == NULL)
+		return (NULL);
 	return (tokens);
 }
