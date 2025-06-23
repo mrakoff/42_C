@@ -15,6 +15,7 @@ LIBFT= $(LIBFT_PATH)/libft.a
 SRCS = $(PRINTF) \
 		src/main.c src/process_input.c \
 		src/utils.c src/utils_push.c src/utils_rotate.c src/utils_swap.c \
+		src/sort.c \
 
 OBJS = $(SRCS:.c=.o)
 

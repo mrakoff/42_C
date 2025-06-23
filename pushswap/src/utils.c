@@ -6,7 +6,7 @@
 /*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:27:38 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/21 17:05:20 by mel              ###   ########.fr       */
+/*   Updated: 2025/06/22 15:05:32 by mel              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	removeend(t_stack **head)
 
 	if (*head == NULL)
 		return ;
-	else if (head_tmp->next == NULL)
+	head_tmp = *head;
+	if (head_tmp->next == NULL)
 	{
 		free(head_tmp);
 		*head = NULL;

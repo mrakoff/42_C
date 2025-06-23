@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:27:38 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/13 23:19:14 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/06/22 20:04:38 by mel              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,41 @@
 /* PROCESS THE INPUT:                                                                            */
 /* + create tokens (separated strings, which contain integer values to compare)                  */
 /* + remove the token if it contains anything else than a numeric value                          */
-/* - convert to integers                                                                         */
-/* - if duplicates = error                                                                       */
-/* ********************************************************************************************** */
+/* + convert to integers  - IN MAIN                                                              */
+/* + if duplicates = error                                                                       */
+/* ********************************************************************************************* */
 
-int	ft_fill_stack(int token, int index, t_stack *node) // t_stack *a
+// checks if there are duplicate tokens
+int	ft_check_dups(char **tokens)
 {
-	// printf("filling the stack..\n");
-
-	node->value = token;
-	node->index = index;
-	printf("value: %lu\n", node->value);
-	printf("index: %d\n\n", node->index);
+	int	len1;
+	int	len2;
+	int	i;
+	int	j;
 	
-	// sort the actual thing - compare values and assign index correctly (if smaller int - smaller index)
+	i = 0;
+	while (tokens[i])
+	{
+		j = i + 1;
+		while (tokens[j])
+		{
+			len1 = ft_strlen(tokens[i]);
+			len2 = ft_strlen(tokens[j]);
+			if (len1 == len2)
+			{
+				if(ft_strncmp(tokens[i], tokens[j], len1) == 0)
+					return (write(2, "Error\n", 6), -1);
+			}
+			j++;
+		}
+		i++;
+	}
 	return (0);
 }
 
 // checks if a string sent contains only numerical values
+// ALSO ADD NEGATIVE VALUES
+// error ifore 
 int	ft_validate_token(char *token)
 {
 	int	i;
@@ -41,13 +58,14 @@ int	ft_validate_token(char *token)
 	i = 0;
 	if (token == NULL)
 		return (-1);
-	// ft_printf("to check: %s\n", token);
 	while (token[i] && ft_isdigit(token[i]) == 1)
 		i++;
 	if (token[i] != '\0')
 		return (-1);
 	return (0);
 }
+
+// LEAKS !!
 
 char	**ft_create_tokens(int argc, char **argv)
 {
@@ -68,7 +86,6 @@ char	**ft_create_tokens(int argc, char **argv)
 			unistring = ft_strjoin(unistring, " ");
 			i++;
 		}
-		// printf("%s\n", unistring);
 		tokens = ft_split(unistring, ' ');
 	}
 	if (tokens == NULL)
