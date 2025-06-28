@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 19:10:47 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/22 19:46:49 by mel              ###   ########.fr       */
+/*   Updated: 2025/06/29 01:16:24 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,26 @@
 typedef struct s_stack
 {
 	long			value; // int itself
-	int				index; // it's value's position in the stack
+	unsigned int	index; // it's value's position in the stack
 	struct s_stack	*next; // next int info
 	
 } t_stack;
 
-// struct to keep track of both stacks?
-typedef struct s_stacks
-{
-	t_stack	a;
-	t_stack	b;
-} t_stacks;
-
-
+// ALGO.C
+int		ft_is_sorted(t_stack **head_a);
+void	ft_sort_three(t_stack **head_a, int max_ind);
+void	radix_sort(t_stack **head_a, t_stack **head_b, int max_ind);
 
 // PROCESS_INPUT.C
 char	**ft_create_tokens(int argc, char **argv);
 int		ft_validate_token(char *token);
 int		ft_check_dups(char **tokens);
 
-// QUICKSORT.C
+// MAIN_UTILS.C
+int		ft_fill(char **tokens, t_stack **head_a);
+int		*ft_create_array(t_stack *head_a, int i);
 void	ft_sort(int *unsorted, int len);
+void	ft_assign_index(t_stack **head_a, int *array, int len);
 
 // UTILS.C
 void	pushbegin(t_stack **head, int index, int value);

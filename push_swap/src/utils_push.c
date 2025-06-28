@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utils_push.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 20:51:19 by msalangi          #+#    #+#             */
-/*   Updated: 2025/04/11 00:54:33 by msalangi         ###   ########.fr       */
+/*   Created: 2025/06/21 19:23:00 by mel               #+#    #+#             */
+/*   Updated: 2025/06/28 02:44:50 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/push_swap.h"
 
-int	ft_atoi(const char *str)
+void	push_a(t_stack **head_a, t_stack **head_b)
 {
-	int	sign;
-	int	num;
+	if (*head_b == NULL)
+		return ;
+	pushbegin(head_a, (*head_b)->index, (*head_b)->value);
+	removebegin(head_b);
+	ft_printf("pa\n");
+}
 
-	sign = 1;
-	num = 0;
-	while (*str == '\t' || *str == '\n' || *str == '\v'
-		|| *str == '\f' || *str == '\r' || *str == ' ')
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		num = num * 10 + (*str - '0');
-		str++;
-	}
-	return (num * sign);
+void	push_b(t_stack **head_a, t_stack **head_b)
+{
+	if (*head_a == NULL)
+		return ;
+	pushbegin(head_b, (*head_a)->index, (*head_a)->value);
+	removebegin(head_a);
+	ft_printf("pb\n");
 }
