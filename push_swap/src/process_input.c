@@ -6,13 +6,12 @@
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:27:38 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/28 02:46:02 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/06/29 05:15:53 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-// checks if there are duplicate tokens
 int	ft_check_dups(char **tokens)
 {
 	int	i;
@@ -24,7 +23,7 @@ int	ft_check_dups(char **tokens)
 		j = i + 1;
 		while (tokens[j])
 		{
-			if (atoi(tokens[i]) == atoi(tokens[j]))
+			if (ft_atoi(tokens[i]) == ft_atoi(tokens[j]))
 				return (-1);
 			j++;
 		}
@@ -48,7 +47,11 @@ int	ft_validate_token(char *token)
 		i++;
 	if (token[i] != '\0')
 		return (-1);
-	if (atoi(token) == -1)
+	printf("am here in validate_token\n");
+	// -1 DOESNT EXIST IT IS NOT A NUMBER
+	// if (ft_atoi(token) == -1)
+	// 	return (-1);
+	if (ft_strlen(token) > 11)
 		return (-1);
 	return (0);
 }

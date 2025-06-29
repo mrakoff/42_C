@@ -6,7 +6,7 @@
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:42:00 by mel               #+#    #+#             */
-/*   Updated: 2025/06/28 02:47:00 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/06/29 05:05:21 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_fill(char **tokens, t_stack **head_a)
 			return (-1);
 		i++;
 	}
+	printf("ft_fill %i\n", i);
 	return (i);
 }
 

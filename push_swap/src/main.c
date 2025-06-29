@@ -6,7 +6,7 @@
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 19:09:50 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/28 02:50:15 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/06/29 05:03:01 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char **argv)
 	if (tokens == NULL || ft_check_dups(tokens) != 0)
 		return (write(2, "Error\n", 6), -1);
 	i = ft_fill(tokens, &head_a);
+	printf("ft_fill returns this: %i\n", i); // remove
 	if (i == -1)
 		return (write(2, "Error\n", 6), -1);
 	array = ft_create_array(head_a, i);
