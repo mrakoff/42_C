@@ -6,7 +6,7 @@
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 20:51:19 by msalangi          #+#    #+#             */
-/*   Updated: 2025/04/11 00:54:33 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/06/29 05:12:40 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_atoi(const char *str)
 {
-	int	sign;
-	int	num;
+	int		sign;
+	long	num;
 
 	sign = 1;
 	num = 0;
@@ -33,5 +33,7 @@ int	ft_atoi(const char *str)
 		num = num * 10 + (*str - '0');
 		str++;
 	}
+	// if ((num > 2147483648 && sign == 1) || (sign = -1 && num > 2147483648))
+	// 	return (-1);
 	return (num * sign);
 }
