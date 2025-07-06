@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 20:51:19 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/29 18:50:36 by msalangi         ###   ########.fr       */
+/*   Created: 2025/03/09 21:34:02 by msalangi          #+#    #+#             */
+/*   Updated: 2025/04/11 14:25:10 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_atoi(const char *str)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	int		sign;
-	long	num;
+	unsigned int	ind;
 
-	sign = 1;
-	num = 0;
-	while (*str == '\t' || *str == '\n' || *str == '\v'
-		|| *str == '\f' || *str == '\r' || *str == ' ')
-		str++;
-	if (*str == '-' || *str == '+')
+	ind = 0;
+	while (ind + 1 < size && *src)
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
+		*dst = *src;
+		ind++;
+		src++;
+		dst++;
 	}
-	while (*str >= '0' && *str <= '9')
+	if (ind < size)
+		*dst = 0;
+	while (*src)
 	{
-		num = num * 10 + (*str - '0');
-		str++;
+		src++;
+		ind++;
 	}
-	return (num * sign);
+	return (ind);
 }

@@ -21,7 +21,6 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(LIBFT) $(NAME)
 
-
 # compilation
 $(LIBFT):
 	@$(MAKE) -s -C $(LIBFT_PATH)
@@ -30,7 +29,6 @@ $(NAME): $(OBJS) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJS) \
 		-L$(LIBFT_PATH) -lft\
 		-o $(NAME)
-
 
 # utility rules
 clean:

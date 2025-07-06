@@ -6,7 +6,7 @@
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:27:38 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/29 05:15:53 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/06/29 21:10:33 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	ft_check_dups(char **tokens)
 	return (0);
 }
 
-// checks if a string sent contains only numerical values
-// TODO: ERROR IF LESS THAN MIN INT OR BIGGER THAN MAX INT
 int	ft_validate_token(char *token)
 {
 	int	i;
@@ -47,16 +45,12 @@ int	ft_validate_token(char *token)
 		i++;
 	if (token[i] != '\0')
 		return (-1);
-	printf("am here in validate_token\n");
-	// -1 DOESNT EXIST IT IS NOT A NUMBER
-	// if (ft_atoi(token) == -1)
-	// 	return (-1);
-	if (ft_strlen(token) > 11)
+	if (ft_strlen(token) > 11 || ft_atoi(token) > 2147483647
+		|| ft_atoi(token) < -2147483648)
 		return (-1);
 	return (0);
 }
 
-// LEAKS ?
 char	**ft_create_tokens(int argc, char **argv)
 {
 	char	**tokens;
@@ -65,17 +59,17 @@ char	**ft_create_tokens(int argc, char **argv)
 	int		i;
 
 	i = 1;
-	tokens = NULL;
 	if (argc < 2)
 		return (NULL);
 	if (argc == 2)
 		tokens = ft_split(argv[1], ' ');
-	else if (argc > 2)
+	else
 	{
 		unistring = ft_strdup("");
 		while (argc > i)
 		{
 			tmp = ft_strjoin(unistring, argv[i++]);
+			free(unistring);
 			unistring = ft_strjoin(tmp, " ");
 			free(tmp);
 		}

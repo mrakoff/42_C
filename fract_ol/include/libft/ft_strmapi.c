@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 20:51:19 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/29 18:50:36 by msalangi         ###   ########.fr       */
+/*   Created: 2025/03/21 19:51:02 by msalangi          #+#    #+#             */
+/*   Updated: 2025/03/23 20:07:55 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_atoi(const char *str)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char c))
 {
-	int		sign;
-	long	num;
+	char	*new;
+	int		ind;
 
-	sign = 1;
-	num = 0;
-	while (*str == '\t' || *str == '\n' || *str == '\v'
-		|| *str == '\f' || *str == '\r' || *str == ' ')
-		str++;
-	if (*str == '-' || *str == '+')
+	ind = 0;
+	if (!s)
+		return (NULL);
+	new = (char *)malloc(sizeof(char) * ft_strlen((const char *)s) + 1);
+	if (!new)
+		return (NULL);
+	while (s[ind])
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
+		new[ind] = f(ind, s[ind]);
+		ind++;
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		num = num * 10 + (*str - '0');
-		str++;
-	}
-	return (num * sign);
+	new[ind] = '\0';
+	return (new);
 }

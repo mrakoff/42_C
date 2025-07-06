@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 20:51:19 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/29 18:50:36 by msalangi         ###   ########.fr       */
+/*   Created: 2025/03/14 22:37:32 by msalangi          #+#    #+#             */
+/*   Updated: 2025/04/11 14:24:33 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_atoi(const char *str)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	int		sign;
-	long	num;
+	unsigned int	s_ind;
+	unsigned int	d_ind;
+	unsigned int	srclen;
 
-	sign = 1;
-	num = 0;
-	while (*str == '\t' || *str == '\n' || *str == '\v'
-		|| *str == '\f' || *str == '\r' || *str == ' ')
-		str++;
-	if (*str == '-' || *str == '+')
+	s_ind = 0;
+	srclen = ft_strlen(src);
+	d_ind = ft_strlen(dst);
+	if (dstsize < d_ind)
+		return ((size_t)(srclen + dstsize));
+	while (src[s_ind] && ((d_ind + s_ind) < (dstsize - 1)) && dstsize > 0)
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
+		dst[d_ind + s_ind] = src[s_ind];
+		s_ind++;
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		num = num * 10 + (*str - '0');
-		str++;
-	}
-	return (num * sign);
+	dst[d_ind + s_ind] = '\0';
+	return ((size_t)(srclen + d_ind));
 }

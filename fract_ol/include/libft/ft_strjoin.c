@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 20:51:19 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/29 18:50:36 by msalangi         ###   ########.fr       */
+/*   Created: 2025/03/19 23:47:25 by msalangi          #+#    #+#             */
+/*   Updated: 2025/04/11 14:24:26 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_atoi(const char *str)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		sign;
-	long	num;
+	char	*join;
+	int		ind;
 
-	sign = 1;
-	num = 0;
-	while (*str == '\t' || *str == '\n' || *str == '\v'
-		|| *str == '\f' || *str == '\r' || *str == ' ')
-		str++;
-	if (*str == '-' || *str == '+')
+	join = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	ind = 0;
+	if (!join)
+		return (NULL);
+	while (*s1)
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
+		join[ind] = *s1;
+		ind++;
+		s1++;
 	}
-	while (*str >= '0' && *str <= '9')
+	while (*s2)
 	{
-		num = num * 10 + (*str - '0');
-		str++;
+		join[ind] = *s2;
+		ind++;
+		s2++;
 	}
-	return (num * sign);
+	join[ind] = '\0';
+	return (join);
 }

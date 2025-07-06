@@ -6,7 +6,7 @@
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 23:27:38 by msalangi          #+#    #+#             */
-/*   Updated: 2025/06/28 02:45:51 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/06/29 20:59:19 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	removeend(t_stack **head)
 	{
 		while (head_tmp->next->next != NULL)
 			head_tmp = head_tmp->next;
-		head_tmp->next = NULL;
 		free(head_tmp->next);
+		head_tmp->next = NULL;
 	}
 }
