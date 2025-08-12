@@ -6,7 +6,7 @@
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 14:29:14 by mel               #+#    #+#             */
-/*   Updated: 2025/07/06 15:57:20 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:28:09 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 
 # define SIZE			800
-# define MAX_ITERATIONS	150
+# define MAX_ITERATIONS	1500
 
 # define BLACK			0x000000ff
 
