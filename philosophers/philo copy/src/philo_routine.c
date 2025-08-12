@@ -6,11 +6,31 @@
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:49:38 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/10 23:20:20 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/08/12 22:53:31 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+static void	think(t_philo *philo)
+{
+	print(philo, philo->data, THINK);
+}
+
+static void	nap(t_philo *philo, int sleep, unsigned long time)
+{
+	unsigned long	start_time;
+
+	start_time = get_time();
+	if (sleep)
+		print(philo, philo->data, SLEEP);
+	while (get_time() - start_time < time) {
+		if (stop(philo->data) == 1)
+			break;
+		usleep(500);
+	}
+	// usleep(philo->data->tt_sleep);
+}
 
 static int	eat(t_philo *philo)
 {
@@ -30,47 +50,26 @@ static int	eat(t_philo *philo)
 	}
 	print(philo, philo->data, EAT);
 
-	lock(&philo->data->mealtime_mutex);
+	lock(&philo->data->status_mutex);
 	philo->last_meal_time = get_time();
-	unlock(&philo->data->mealtime_mutex);
-	
-	lock(&philo->data->meal_count_mutex);
 	philo->meal_count++;
-	unlock(&philo->data->meal_count_mutex);
+	unlock(&philo->data->status_mutex);
 	
-	usleep(philo->data->tt_eat * 100);
-	
+	nap(philo, 0, philo->data->tt_eat);
+
 	unlock(philo->rfork);
 	unlock(philo->lfork);
 	return (0);
 }
 
-static void	nap(t_philo *philo)
-{
-	print(philo, philo->data, SLEEP);
-	usleep(philo->data->tt_sleep);
-}
-
-static void	think(t_philo *philo)
-{
-	print(philo, philo->data, THINK);
-}
 
 void	wait_for_threads(t_philo *philo)
 {
-	// unsigned long	time;
-
-	// time = get_time();
-	lock(&philo->data->mealtime_mutex);
+	lock(&philo->data->status_mutex);
+	philo->data->start = 1;
 	philo->data->start_time = get_time();
-	unlock(&philo->data->mealtime_mutex);
-	// // while (philo->data->start != 1)
-	// {
-	// 	// usleep(100);
-	// }
-	// lock(&philo->data->mealtime_mutex);
-	// philo->last_meal_time = get_time();
-	// unlock(&philo->data->mealtime_mutex);
+	unlock(&philo->data->status_mutex);
+
 }
 
 // the loop runs until a philo dies
@@ -89,7 +88,9 @@ void	*philo_routine(void *arg)
 		eat(philo);
 		if (stop(data) == 1)
 			break;
-		nap(philo);
+		nap(philo, 1, data->tt_sleep);
+		if (stop(data) == 1)
+			break;
 		think(philo);
 	}
 	return (NULL);

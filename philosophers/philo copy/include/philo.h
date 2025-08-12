@@ -6,7 +6,7 @@
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 01:19:35 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/10 23:23:28 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:22:08 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@
 # define SLEEP		" is sleeping\n"
 # define THINK		" is thinking\n"
 # define DIE		" died\n"
+# define FULL		"\nEveryone is full!\n"
 
-# define GREEN		"\033[32m"
-# define RED		"\033[31m"
+# define GREEN		"\033[1m\033[32m"
+# define RED		"\033[1m\033[31m"
 # define END		"\033[0m"
 
 // individual philo data
@@ -42,7 +43,6 @@ typedef struct	s_philo
 	unsigned int	index;			// index of philo
 	unsigned long	last_meal_time;	// last meal timestamp
 	int				meal_count;		// meals eaten
-	// int				is_full;
 	struct s_data	*data;			// pointer to the shared data struct
 }	t_philo;
 
@@ -68,6 +68,7 @@ typedef struct	s_data
 	pthread_mutex_t	meal_count_mutex;
 	pthread_mutex_t	mealtime_mutex;
 	pthread_mutex_t	dead_mutex;
+	
 
 }	t_data;
 

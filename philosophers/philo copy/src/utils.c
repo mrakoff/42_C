@@ -6,7 +6,7 @@
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:46:31 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/10 22:43:19 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/08/12 22:41:28 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 void	print(t_philo *philo, t_data *data, char *status)
 {
-	unsigned long	time;
-
 	lock(&data->print_mutex);
-	lock(&data->mealtime_mutex);
-	time = get_time() - (data->start_time);
+	if (!status)
+	{
+		printf("%s%s%s", GREEN, FULL, END);
+		unlock(&data->print_mutex);
+		return ;
+	}
+	lock(&data->dead_mutex);
 	if (!data->stop)
-		printf("%lu %s%i%s %s", time, GREEN, philo->index, END, status);
-	unlock(&data->mealtime_mutex);
-	pthread_mutex_unlock(&data->print_mutex);
+		printf("%lu %s%i%s %s", get_time() - (data->start_time), GREEN, philo->index + 1, END, status);
+	unlock(&data->dead_mutex);
+	unlock(&data->print_mutex);
 }
 
 unsigned long	get_time(void)

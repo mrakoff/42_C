@@ -6,7 +6,7 @@
 /*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 01:13:18 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/10 23:24:38 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/08/12 23:02:20 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@
 *	hellgrind checks // valgrind --tool=helgrind ./philo <args> // valgrind --tool=drd ./philo <args>
 *	
 *	+ print time in ms
-*	- supervisor thread functions
+*	+ supervisor thread functions
 *		- check if anyone is dead
-*		- check if everyone is full
+*		+ check if everyone is full
 *	+ eat function
+*	- handle one philo (shiould die after tt_die)
 *	- wait for threads function
 *	- input larger than max int check
 *	- separate fuctions / cut lines
@@ -53,8 +54,8 @@ void cleanup(t_data *data)
 		free(data->philos);
 	pthread_mutex_destroy(&data->print_mutex);
 	pthread_mutex_destroy(&data->dead_mutex);
-	pthread_mutex_destroy(&data->meal_count_mutex);
-	pthread_mutex_destroy(&data->mealtime_mutex);
+	// pthread_mutex_destroy(&data->meal_count_mutex);
+	// pthread_mutex_destroy(&data->mealtime_mutex);
 	free(data);
 }
 
@@ -81,9 +82,6 @@ int main(int argc, char **argv)
 
 	// JOIN THREADS
 	pthread_join(data->monitor, NULL);
-	// pthread_mutex_lock(&data->dead_mutex);
-	// data->stop = 1;
-	// pthread_mutex_unlock(&data->dead_mutex);
 
 	int i = 0;
 	while (i < philo_count)
@@ -91,9 +89,9 @@ int main(int argc, char **argv)
 		pthread_join(data->philos[i].thread, NULL);
 		i++;
 	}
-	free(data->philos);
+	// free(data->philos);
 
 	// FREE STUFF
 	cleanup(data);
-	printf(RED "Threads finished :P\n" END);
+	// printf(RED "Threads finished :P\n" END);
 }
