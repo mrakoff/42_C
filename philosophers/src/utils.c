@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:46:31 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/12 22:41:28 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/08/13 15:22:29 by mel              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,27 @@ long	atoui(const char *str)
 	return (num);
 }
 
-void	lock(pthread_mutex_t *mutex)
+static int	is_num(char *s)
 {
-	pthread_mutex_lock(mutex);
+	while (*s >= '0' && *s <= '9')
+		s++;
+	if (*s == '\0')
+		return (1);
+	return (0);
 }
 
-void	unlock(pthread_mutex_t *mutex)
+int	check_input(int argc, char **argv)
 {
-	pthread_mutex_unlock(mutex);
+	int	i;
+
+	i = 1;
+	if (argc != 5 && argc != 6)
+		return (1);
+	while (i < argc && is_num(argv[i]))
+		i++;
+	if (i != argc || argv[1][0] == '0' || argv[2][0] == '0')
+		return (1);
+	if (argc == 6 && (argv[5][0] == '\0' || argv[5][0] == '0'))
+		return (1);
+	return (0);
 }

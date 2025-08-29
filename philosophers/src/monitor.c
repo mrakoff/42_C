@@ -3,26 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:15:16 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/12 22:40:49 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/08/13 15:15:55 by mel              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	stop(t_data *data)
-{
-	int	stop;
-
-	lock(&data->dead_mutex);
-	stop = data->stop;
-	unlock(&data->dead_mutex);
-	return (stop);
-}
-
-int	everyone_full(t_data *data)
+static int	everyone_full(t_data *data)
 {
 	unsigned int	i;
 	int				full;
@@ -43,13 +33,12 @@ int	everyone_full(t_data *data)
 	return (full);
 }
 
-int	died(t_data *data)
+static int	died(t_data *data)
 {
 	unsigned int	i;
-	
+
 	i = 0;
 	lock(&data->status_mutex);
-	lock(&data->mealtime_mutex);
 	while (i < data->philo_count)
 	{
 		// printf("Philo %d: time = %lu, last_meal_time = %lu, tt_die = %lu, diff = %lu\n",
@@ -60,43 +49,41 @@ int	died(t_data *data)
 			lock(&data->dead_mutex);
 			data->stop = 1;
 			unlock(&data->dead_mutex);
-	
-			unlock(&data->mealtime_mutex);
 			unlock(&data->status_mutex);
 			return (1);
 		}
 		i++;
 	}
-	unlock(&data->mealtime_mutex);
 	unlock(&data->status_mutex);
 	return (0);
 }
 
-void	*monitor(void *arg)
+static void	synchronize(t_data *data)
 {
-	t_data			*data;
-	unsigned int	i;
-	
-	data = arg;
-	i = 0;
 	while (1)
 	{
 		lock(&data->status_mutex);
 		if (data->start)
 		{
 			unlock(&data->status_mutex);
-			break;
+			break ;
 		}
 		unlock(&data->status_mutex);
 		usleep(100);
 	}
+}
+
+void	*monitor(void *arg)
+{
+	t_data			*data;
+
+	data = arg;
+	synchronize(data);
 	while (1)
 	{
-		if (died(data) == 1)
-		{
+		if (died(data))
 			break;
-		}
-		if (data->meal_num > 0 && everyone_full(data) == 1)
+		if (data->meal_num > 0 && everyone_full(data))
 		{
 			lock(&data->dead_mutex);
 			data->stop = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 18:03:11 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/12 22:40:20 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/08/13 15:12:45 by mel              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	forks_init(pthread_mutex_t *forks, t_philo *philo, unsigned int i)
 {
-	if (philo->index % 2 == 0)
+	if (!philo->index % 2)
 	{
 		philo->rfork = &forks[i];
 		philo->lfork = &forks[(i + 1) % philo->data->philo_count];
@@ -49,25 +49,22 @@ static void	philo_init(t_data *data, unsigned int philo_count)
 	}
 }
 
-int	data_init(t_data *data, int philo_count, int argc, char **argv)
+int	data_init(t_data *data, int philo_count, char **argv)
 {
-	int	i;
-	
-	i = 0;
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->status_mutex, NULL);
 	pthread_mutex_init(&data->dead_mutex, NULL);
-
 	data->philos = malloc(sizeof(t_philo) * philo_count);
 	data->forks = malloc(sizeof(pthread_mutex_t) * philo_count);
-	
+	if (!data->philos || !data->forks)
+		return (-1);	
 	data->start = 0;
 	data->stop = 0;
 	data->philo_count = philo_count;
 	data->tt_die = atoui(argv[2]);
 	data->tt_eat = atoui(argv[3]);
 	data->tt_sleep = atoui(argv[4]);
-	if (argc == 6)
+	if (argv[5])
 		data->meal_num = atoui(argv[5]);
 	else
 		data->meal_num = -1;
