@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 22:12:11 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/13 15:10:47 by mel              ###   ########.fr       */
+/*   Updated: 2025/09/06 20:03:51 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	create_threads(t_data *data)
 		return (1);
 	while (i < data->philo_count)
 	{
-		if (pthread_create(&data->philos[i].thread, NULL, philo_routine, &data->philos[i]) != 0)
+		if (pthread_create(&data->philos[i].thread, NULL,
+				philo_routine, &data->philos[i]) != 0)
 			return (1);
 		i++;
 	}
@@ -38,10 +39,10 @@ int	stop(t_data *data)
 	return (stop);
 }
 
-void cleanup(t_data *data)
+void	cleanup(t_data *data)
 {
-	unsigned int i;
-	
+	unsigned int	i;
+
 	i = 0;
 	if (data->forks)
 	{

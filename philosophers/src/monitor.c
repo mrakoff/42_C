@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 14:15:16 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/13 15:15:55 by mel              ###   ########.fr       */
+/*   Updated: 2025/09/06 19:27:54 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ static int	died(t_data *data)
 	lock(&data->status_mutex);
 	while (i < data->philo_count)
 	{
-		// printf("Philo %d: time = %lu, last_meal_time = %lu, tt_die = %lu, diff = %lu\n",
-            // data->philos[i].index, get_time(), data->philos[i].last_meal_time, data->tt_die, (get_time() - (data->philos[i].last_meal_time)));
 		if (((get_time() - (data->philos[i].last_meal_time)) >= data->tt_die))
 		{
 			print(&data->philos[i], data, DIE);
@@ -82,7 +80,7 @@ void	*monitor(void *arg)
 	while (1)
 	{
 		if (died(data))
-			break;
+			break ;
 		if (data->meal_num > 0 && everyone_full(data))
 		{
 			lock(&data->dead_mutex);
@@ -95,3 +93,7 @@ void	*monitor(void *arg)
 	}
 	return (NULL);
 }
+// printf("Philo %d: time = %lu, last_meal_time = %lu, tt_die = %lu,
+//diff = %lu\n",
+// data->philos[i].index, get_time(), data->philos[i].last_meal_time,
+// data->tt_die, (get_time() - (data->philos[i].last_meal_time)));

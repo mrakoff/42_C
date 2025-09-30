@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:49:38 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/13 15:35:51 by mel              ###   ########.fr       */
+/*   Updated: 2025/09/06 20:02:17 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	nap(t_philo *philo, int sleep, unsigned long time)
 	while (get_time() - start_time < time)
 	{
 		if (stop(philo->data))
-			break;
+			break ;
 		usleep(500);
 	}
 }
@@ -65,18 +65,8 @@ static void	lonely_philo(t_philo *philo)
 	lock(philo->rfork);
 	print(philo, philo->data, TAKES_FORK);
 	unlock(philo->rfork);
-	lock(&philo->data->dead_mutex);
-	philo->data->stop = 1;
-	unlock(&philo->data->dead_mutex);
-}
-
-static void	wait_for_threads(t_philo *philo)
-{
-	lock(&philo->data->status_mutex);
-	philo->data->start = 1;
-	philo->data->start_time = get_time();
-	unlock(&philo->data->status_mutex);
-
+	if (stop(philo->data))
+		print(philo, philo->data, DIE);
 }
 
 void	*philo_routine(void *arg)
@@ -98,10 +88,10 @@ void	*philo_routine(void *arg)
 	{
 		eat(philo);
 		if (stop(data))
-			break;
+			break ;
 		nap(philo, 1, data->tt_sleep);
 		if (stop(data))
-			break;
+			break ;
 		think(philo);
 	}
 	return (NULL);

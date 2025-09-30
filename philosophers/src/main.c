@@ -3,40 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 01:13:18 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/13 15:18:44 by mel              ###   ########.fr       */
+/*   Updated: 2025/09/06 20:11:32 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*		 (1)
-*		f + f
-*	(4) + + + (2)
-*		f + f
-*		 (3)
-*
-*	think -> eat -> sleep -> think -> ..
-*	- index % 2
-*
-*	each philo is represented as a thread
-*	3-4 mutexes (time variable, isdead variable, )
-*	hellgrind checks // valgrind --tool=helgrind ./philo <args> // valgrind --tool=drd ./philo <args>
-*	
-*	+ print time in ms
-*	+ supervisor thread functions
-*		- check if anyone is dead
-*		+ check if everyone is full
-*	+ eat function
-*	- handle one philo (shiould die after tt_die)
-*	- wait for threads function
-*	- input larger than max int check
-*	- separate fuctions / cut lines
-*/
+// hellgrind checks // valgrind --tool=helgrind ./philo <args>
+// valgrind --tool=drd ./philo <args>
 
 #include "../include/philo.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data			*data;
 	int				philo_count;
@@ -60,5 +39,5 @@ int main(int argc, char **argv)
 		i++;
 	}
 	cleanup(data);
-	printf(RED "Simulation ended\n" END);
+	// printf(RED "Simulation ended\n" END);
 }

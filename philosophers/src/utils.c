@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:46:31 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/13 15:22:29 by mel              ###   ########.fr       */
+/*   Updated: 2025/09/06 20:02:45 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	print(t_philo *philo, t_data *data, char *status)
 	}
 	lock(&data->dead_mutex);
 	if (!data->stop)
-		printf("%lu %s%i%s %s", get_time() - (data->start_time), GREEN, philo->index + 1, END, status);
+		printf("%lu %s%i%s %s", get_time() - (data->start_time),
+			GREEN, philo->index + 1, END, status);
 	unlock(&data->dead_mutex);
 	unlock(&data->print_mutex);
 }
@@ -35,7 +36,7 @@ unsigned long	get_time(void)
 
 	gettimeofday(&t, NULL);
 	time = (t.tv_sec * 1000) + (t.tv_usec / 1000);
-	return(time);
+	return (time);
 }
 
 long	atoui(const char *str)

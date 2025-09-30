@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 18:03:11 by msalangi          #+#    #+#             */
-/*   Updated: 2025/08/13 15:12:45 by mel              ###   ########.fr       */
+/*   Updated: 2025/09/06 19:24:10 by msalangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	data_init(t_data *data, int philo_count, char **argv)
 	data->philos = malloc(sizeof(t_philo) * philo_count);
 	data->forks = malloc(sizeof(pthread_mutex_t) * philo_count);
 	if (!data->philos || !data->forks)
-		return (-1);	
+		return (-1);
 	data->start = 0;
 	data->stop = 0;
 	data->philo_count = philo_count;
