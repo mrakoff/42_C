@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<title>todo</title>
+	<link rel="stylesheet" href="index.css"/>
+	<script src="todo.js" defer></script>
+	<style>
+		body
+		{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0;
+		height: 100vh;
+		background-color: rgb(199, 226, 242);
+		}
+		#ft_list {
+		width: 500px;
+		border: 2px solid #9c8f7c;
+		padding: 10px;
+		min-height: 150px;
+		align-items: center;
+		background: #ecf3fe;
+		align-items: center;
+		text-align: center;
+		}
+	.todo
+	{
+	background: #e0ecfb;
+	padding: 10px;
+	margin: 5px 0;
+	border-radius: 6px;
+	color: rgb(71, 85, 110);
+	font-weight: bold;
+	cursor: pointer;
+	}
+	button
+	{
+	margin: 15px;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	color: #9c8f7c;
+	}
+	h1
+	{
+		color: #9c8f7c;
+		margin-top: 0px;
+	}
+  </style>
+</head>
+<body>
+	<div id="ft_list">
+		<h1>TO DO</h1>
+		<button id="button" onclick="Savetodos()">New</button>
+	</div>
+</body>
+</html>

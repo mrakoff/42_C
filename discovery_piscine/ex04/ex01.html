@@ -1,0 +1,141 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>balloon</title>
+<style>
+html, body
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	height: 100vh;
+}
+.balloon
+{
+	min-width: 200px;
+	min-height: 200px;
+	width: 200px;
+	height: 200px;
+	max-width: 420px;
+	max-height: 420px;
+	background-color: red;
+	border-radius: 50%;
+	transition: background-color 0.3s;
+	transition: ease 0.3s;
+}
+button
+{
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+	<button id="button">
+		<div class="balloon"></div>
+	</button>
+	<script>
+		const button = document.getElementById("button");
+		const balloon = button.querySelector(".balloon");
+		const colors = ["red", "green", "blue"];
+		let i = 0;
+		let width = 200;
+		let height = 200;
+		button.addEventListener("click", function() {
+			i = (i + 1) % 3;
+			balloon.style.backgroundColor = colors[i];
+			height += 10;
+			width += 10;
+			balloon.style.width = width + "px";
+			balloon.style.height = height + "px";
+			if (width > 420)
+			{
+				balloon.style.width = "200px";
+				balloon.style.height = "200px";
+				width = 200;
+				height = 200;
+			}
+		});
+		button.addEventListener("mouseleave", function() {
+			i = (i - 1 + 3) % 3;
+			balloon.style.backgroundColor = colors[i];
+			width -= 5;
+			height -= 5;
+			balloon.style.width = width + "px";
+			balloon.style.height = height + "px";
+		});
+	</script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>balloon</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    html, body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      height: 100vh;
+    }
+    .balloon {
+      min-width: 200px;
+      min-height: 200px;
+      width: 200px;
+      height: 200px;
+      max-width: 420px;
+      max-height: 420px;
+      background-color: red;
+      border-radius: 50%;
+      transition: background-color 0.3s, width 0.3s, height 0.3s;
+    }
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button id="button">
+    <div class="balloon"></div>
+  </button>
+
+  <script>
+    $(document).ready(function() {
+      const colors = ["red", "green", "blue"];
+      let i = 0;
+      let width = 200;
+      let height = 200;
+
+      $("#button").click(function() {
+        i = (i + 1) % 3;
+        $(".balloon").css("background-color", colors[i]);
+        width += 10;
+        height += 10;
+        $(".balloon").css({ width: width + "px", height: height + "px" });
+
+        if (width > 420) {
+          width = 200;
+          height = 200;
+          $(".balloon").css({ width: "200px", height: "200px" });
+        }
+      });
+
+      $("#button").mouseleave(function() {
+        i = (i - 1 + 3) % 3;
+        $(".balloon").css("background-color", colors[i]);
+        width -= 5;
+        height -= 5;
+        $(".balloon").css({ width: width + "px", height: height + "px" });
+      });
+    });
+  </script>
+</body>
+</html>

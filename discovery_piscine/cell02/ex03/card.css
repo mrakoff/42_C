@@ -1,0 +1,51 @@
+html, body
+{
+	height: 100%;
+	width: 100%;
+	background-color: rgb(255, 255, 255);
+	margin: 0;
+}
+
+table
+{
+	min-width: 90px;
+	max-width: 300px;
+	min-height: 200px;
+	margin: 0 auto;
+	margin-top: 10%;
+	box-shadow: 10px 10px 10px;
+	border: 2px solid rgb(14, 42, 153);
+	border-collapse: collapse;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+th, td
+{
+	width: 100%;
+	line-height: 0.8;
+}
+
+h1, h2, h3
+{
+	color: rgb(14, 42, 153);
+}
+
+h1, h2, h3, h4
+{
+	margin: 15px;
+}
+
+button
+{
+	background-color: rgb(14, 42, 153);
+	color: white;
+	font-size: 20px;
+	border: none;
+	width: 101%;
+	padding: 10px;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom: -1px;
+	margin-left: -2px;
+}
