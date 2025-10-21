@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msalangi <msalangi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: mel <mel@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:21:24 by msalangi          #+#    #+#             */
-/*   Updated: 2025/05/06 00:53:25 by msalangi         ###   ########.fr       */
+/*   Updated: 2025/10/07 19:27:53 by mel              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-// # define BUFFER_SIZE 100
+# define BUFFER_SIZE 100
 
 # include <fcntl.h>
 # include <stdlib.h>
