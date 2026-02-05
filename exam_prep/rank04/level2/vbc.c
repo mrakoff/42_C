@@ -72,7 +72,7 @@ int expect(char **s, char c)
 
 
 //				AAAAAAAAAAAAAAAAAAAAAAaaaaaaaa
-node    *parse_expr(char *s);
+node    *parse_expr(char **s);
 
 node	*parse_par(char **s)
 {
@@ -81,7 +81,7 @@ node	*parse_par(char **s)
 
 	if (accept(s, '('))
 	{
-		n = parse_expr(*s);
+		n = parse_expr(s);
 		expect(s, ')');
 		return (n);
 	}
@@ -107,25 +107,16 @@ node	*parse_mult(char **s)
 }
 
 
-node    *parse_expr(char *s)
+node    *parse_expr(char **s)
 {
-	char *p = s;
-	node *left = parse_mult(&p);
+	node *left = parse_mult(s);
 
-	// while '+'
-	while (accept(&p, '+'))
+	while (accept(s, '+'))
 	{
-		node *right = parse_mult(&p);
+		node *right = parse_mult(s);
 		node *new = new_node((node){ADD, 0, left, right});
 		left = new;
 	}
-
-	// given:
-    if (*s) 
-    {
-        destroy_tree(left);
-        return (NULL);
-    }
     return (left);
 }
 
@@ -144,11 +135,20 @@ int eval_tree(node *tree)
 
 int main(int argc, char **argv)
 {
+	char *s = argv[1];
     if (argc != 2)
         return (1);
-    node *tree = parse_expr(argv[1]);
+    node *tree = parse_expr(&s);
     if (!tree)
+		return (1);
+
+	if (*s)
+    {
+		unexpected(*s);
+        destroy_tree(tree);
         return (1);
+    }
+
     printf("%d\n", eval_tree(tree));
     destroy_tree(tree);
 }
